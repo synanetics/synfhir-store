@@ -1,5 +1,5 @@
 # Model FHIR Proxy (Node, Moleculer, Postgres)
-Yorkshire and Humber Care Record](https://yhcr.org)
+[Yorkshire and Humber Care Record](https://yhcr.org)
 
 Twitter: [@YHCareRecord](https://twitter.com/YHCareRecord/)
 
@@ -31,6 +31,9 @@ The following steps describe how to get the current version of the Model FHIR Pr
 
 ## Pre-requisites
 
+### Git
+If you haven't already got it, then please install [git](https://www.git-scm.com). If you prefer, you can install the [github desktop client](https://desktop.github.com)... NOTE: Other git clients are available!
+
 ### Docker
 Docker is required to run ROQR. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine.
 
@@ -50,6 +53,17 @@ The flavour of dev enviroment is of course entirely up to you... the Model FHIR 
 ### Get the source
 
 1. Either navigate to your local repo directory or create one, e.g. `C:\myrepos\` or `~/Repos`
+
+2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
+
+3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
+
+### Configuration (optional)
+The repo comes with all the configuration necessary to start the Model FHIR Proxy. That said, however, changes can be made to following files to suit local environments.
+
+proxy.env
+---
+This 
 
 2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
 
