@@ -1,14 +1,16 @@
 version: "3.2"
 #
-# Spin up backend services for local development
+# Spin up an instance of the Model FHIR Proxy
 #
-# cd deploy/local-backend
-# docker-compose up -d
+# cd run
+# docker-compose up
+# (docker-compose up -d)
 #
-# OR
+# OR via npm
 #
 # cd /
-# npm run dev
+# npm run proxy:up
+# (npm run proxy:up:detached)
 #
 services:
 

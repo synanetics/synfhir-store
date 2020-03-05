@@ -58,17 +58,6 @@ The flavour of dev enviroment is of course entirely up to you... the Model FHIR 
 
 3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
 
-### Configuration (optional)
-The repo comes with all the configuration necessary to start the Model FHIR Proxy. That said, however, changes can be made to following files to suit local environments.
-
-proxy.env
----
-This 
-
-2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
-
-3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
-
 ### Docker Compose
 At the command line:
 
