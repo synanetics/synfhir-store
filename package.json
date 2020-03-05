@@ -1,0 +1,22 @@
+{
+  "name": "synfhir-store",
+  "version": "1.0.0",
+  "description": "Moleculer, Postgres FHIR store created for Yorkshire and Humber Care Record",
+  "scripts": {
+    "proxy:up": "cd run && docker-compose up",
+    "proxy:up:detached": "cd run && docker-compose up -d",
+    "proxy:down":"cd run && docker-compose down",
+    "proxy:start":"cd run && docker-compose start",
+    "proxy:stop":"cd run && docker-compose stop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/synanetics/synfhir-store.git"
+  },
+  "author": "Synanetics Ltd.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/synanetics/synfhir-store/issues"
+  },
+  "homepage": "https://github.com/synanetics/synfhir-store#readme"
+}
