@@ -1,13 +1,18 @@
 {
   "name": "synfhir-store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Moleculer, Postgres FHIR store created for Yorkshire and Humber Care Record",
   "scripts": {
-    "proxy:up": "cd run && docker-compose up",
-    "proxy:up:detached": "cd run && docker-compose up -d",
-    "proxy:down":"cd run && docker-compose down",
-    "proxy:start":"cd run && docker-compose start",
-    "proxy:stop":"cd run && docker-compose stop"
+    "linux:proxy:up": "cd run/linux && docker-compose up",
+    "linux:proxy:up:detached": "cd run/linux run && docker-compose up -d",
+    "linux:proxy:down":"cd run/linux && docker-compose down",
+    "linux:proxy:start":"cd run/linux && docker-compose start",
+    "linux:proxy:stop":"cd run/linux && docker-compose stop",
+    "windows:proxy:up": "cd run/windows && docker-compose up",
+    "windows:proxy:up:detached": "cd run/windows run && docker-compose up -d",
+    "windows:proxy:down":"cd run/windows && docker-compose down",
+    "windows:proxy:start":"cd run/windows && docker-compose start",
+    "windows:proxy:stop":"cd run/windows && docker-compose stop"
   },
   "repository": {
     "type": "git",
