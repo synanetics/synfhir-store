@@ -14,17 +14,6 @@ version: "3.2"
 #
 services:
 
-  localdb:
-    image: stefanscherer/postgres-windows:10.2-nano
-    container_name: localdb
-    restart: always
-    env_file:
-      - ../db.env
-    volumes:
-      - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - 5432:5432
-
   proxy:
     image: synaneticsltd/synfhir-store-windows:latest
     container_name: proxy
