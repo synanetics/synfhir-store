@@ -14,13 +14,6 @@ version: "3.2"
 #
 services:
 
-  transport:
-    image: rabbitmq:3-management
-    container_name: transport
-    ports:
-      - 5673:5672
-      - 15673:15672
-
   localdb:
     image: postgres
     container_name: localdb
@@ -28,7 +21,7 @@ services:
     env_file:
       - db.env
     volumes:
-      - ./db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
+      - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
 
@@ -36,7 +29,7 @@ services:
     image: dpage/pgadmin4
     container_name: localdb-client
     env_file:
-        - dbclient.env
+        - ../dbclient.env
     ports:
       - 8888:80
     depends_on:
@@ -46,10 +39,9 @@ services:
     image: synaneticsltd/synfhir-store:latest
     container_name: proxy
     env_file:
-       - proxy.env
+       - ../proxy.env
     ports:
       - 3001:3000
     depends_on: 
       - localdb
-      - transport
     

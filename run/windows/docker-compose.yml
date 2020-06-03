@@ -1,0 +1,47 @@
+version: "3.2"
+#
+# Spin up an instance of the Model FHIR Proxy
+#
+# cd run
+# docker-compose up
+# (docker-compose up -d)
+#
+# OR via npm
+#
+# cd /
+# npm run proxy:up
+# (npm run proxy:up:detached)
+#
+services:
+
+  localdb:
+    image: postgres
+    container_name: localdb
+    restart: always
+    env_file:
+      - ../db.env
+    volumes:
+      - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+
+  localdb-client:
+    image: dpage/pgadmin4
+    container_name: localdb-client
+    env_file:
+        - ../dbclient.env
+    ports:
+      - 8888:80
+    depends_on:
+      - localdb
+
+  proxy:
+    image: synaneticsltd/synfhir-store-windows:latest
+    container_name: proxy
+    env_file:
+       - ../proxy.env
+    ports:
+      - 3001:3000
+    depends_on: 
+      - localdb
+    
