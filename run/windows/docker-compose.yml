@@ -15,7 +15,7 @@ version: "3.2"
 services:
 
   localdb:
-    image: postgres
+    image: stefanscherer/postgres-windows:10.2-nano
     container_name: localdb
     restart: always
     env_file:
@@ -24,16 +24,6 @@ services:
       - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
-
-  localdb-client:
-    image: dpage/pgadmin4
-    container_name: localdb-client
-    env_file:
-        - ../dbclient.env
-    ports:
-      - 8888:80
-    depends_on:
-      - localdb
 
   proxy:
     image: synaneticsltd/synfhir-store-windows:latest
