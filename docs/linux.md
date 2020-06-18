@@ -2,7 +2,7 @@
 
 ---
 
-Linux containers will run on [Docker Desktop](https://www.docker.com/products/docker-desktop) for Mac, Linux and Windows 10. For Windows Server OS then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers](windows.md)
+Linux Containers will run on [Docker Desktop](https://www.docker.com/products/docker-desktop) for Mac, Linux and Windows 10. For Windows Server OS then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers](windows.md)
 
 ## Launching The Model FHIR Proxy
 

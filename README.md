@@ -47,15 +47,11 @@ Docker is required to run the Model FHIR Proxy. There are lots of documents whic
 The flavour of dev enviroment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com), are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
 
 ### Postgres (Windows Server)
-
+[PostgreSQL 11 (for Windows Server 2012 R2, 2016, 2019)](https://www.postgresql.org/download/windows/) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
 ---
 
 ## Launching The Model FHIR Proxy
-
-[Linux Containers](docs/linux.md)
-
-[Windows Containers - Windows Server](docs/windows.md)
 
 ### Get the source
 
@@ -65,33 +61,13 @@ The flavour of dev enviroment is of course entirely up to you... the Model FHIR 
 
 3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
 
-### Docker Compose
-At the command line:
+### Choose your flavour
 
-1. Change to the repo directory (if not already there).
+[Linux Containers - Docker Desktop for Mac, Linux and Windows 10](docs/linux.md)
 
-2. Change your working directory to run: `cd run`
+[Windows Containers - Windows Server](docs/windows.md)
 
-3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`
-
-4. Or, should you prefer, bring the server in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up -d`
-
-5. To tear the containers down, simply enter `docker-compose down`
-
-6. You can stop and restart the containers (which will persist data) by using `docker-compose start` and `docker-compose stop` respectively.
-
-### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
-At the command line:
-
-1. Change to the repo directory (if not already there).
-
-2. Execute `npm run proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-3. Execute `npm run proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-4. To tear down or stop the server, execute one of: `npm run proxy:down` (to tear down) or `npm run proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run proxy:start` next time you wish to spin the server up.
-
-### Postman Collection and Environment
+### Run our Model FHIR Proxy Postman Collection and Environment
 Once the Model FHIR Proxy is up and running, you can try out the FHIR API by executing the following Postman collection (and environment). 
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/dc0824e925ddb1d4cf9c#?env%5BMODEL-FHIR-PROXY%5D=W3sia2V5IjoiYXRMYXN0UGFnZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJiYXNlX2ZoaXJfcGF0aCIsInZhbHVlIjoiL2ZoaXIvU1RVMyIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYmF0Y2hfZmlyc3RfdGFyZ2V0X3Rlc3RfcGF0aWVudF9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJiYXRjaF9vcmdhbml6YXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYmF0Y2hfcHJhY3RpdGlvbmVyX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImJhdGNoX3NlY29uZF90YXJnZXRfdGVzdF9wYXRpZW50X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImJhdGNoX3RoaXJkX3RhcmdldF90ZXN0X3BhdGllbnRfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiYnVuZGxlIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImJ1bmRsZUlkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImNjcmlTZWFyY2hVcmwiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiY3VycmVudCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJjdXJyZW50UGFnZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJlbmNvdW50ZXJfcmVzb3VyY2VfdXJsIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF9hbGxlcmd5X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF9jb25kaXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX2NvbnNlbnRfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX2VuY291bnRlcl9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJmaGlyX2NyZWF0ZWRfbG9jYXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX21lZGljYXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX21lZGljYXRpb25fc3RhdGVtZW50X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF9vYnNlcnZhdGlvbl9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJmaGlyX2NyZWF0ZWRfb3JnYW5pemF0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF9wYXRpZW50X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF9wb2xpY3lfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX3ByYWN0aXRpb25lcl9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJmaGlyX2NyZWF0ZWRfcHJhY3RpdGlvbmVyX3JvbGVfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmhpcl9jcmVhdGVkX3Byb2NlZHVyZV9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJmaGlyX2NyZWF0ZWRfc3Vic2NyaXB0aW9uX2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6ImZoaXJfY3JlYXRlZF90ZXJtc19wb2xpY3lfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiZmlyc3RQYWdlUmVzb3VyY2VJZHMiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaGFzaGVkSW5kZXgiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaW5jbHVkZV9lbmNvdW50ZXJfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaW5jbHVkZV9vcmdhbmlzYXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaW5jbHVkZV9vcmdhbml6YXRpb25faWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaW5jbHVkZV9wcmFjdGl0aW9uZXJfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoiaW5kZXhSZXNvdXJjZUlkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Imp3dF90b2tlbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJsYXN0VGVzdE5IU051bWJlciIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJsYXN0VXBkYXRlZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJsYXN0X3BhZ2UiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoibWVzc2FnZUlkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6Im5leHRQYWdlUmVzb3VyY2VJZHMiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoibmV4dF9wYWdlIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InBhdGllbnRfcmVzb3VyY2VfdXJsIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InBhdGllbnRfc2VhcmNoX25leHRfcGFnZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJwYXRpZW50X3NlYXJjaF9yZXN1bHRfaWRzIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InByb3h5X3NlcnZlcl9hZGRyZXNzIiwidmFsdWUiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZ2lzdGVyZWRfY2xpZW50X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlZ2lzdGVyZWRfY2xpZW50X3NlY3JldCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZXF1ZXN0IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlcXVlc3RJZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZXF1ZXN0ZWRPbiIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZXNvdXJjZUlkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InJlc291cmNlVHlwZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJyZXNvdXJjZV91cmwiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoicmV2ZXJzZV9wcm94eV9hZGRyZXNzIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InNlYXJjaF9maXJzdF90YXJnZXRfdGVzdF9wYXRpZW50X2lkIiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlfSx7ImtleSI6InNvcnRlZEJ1bmRsZSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJ0YXJnZXRfdGVzdF9lbmNvdW50ZXJfaWQiLCJ2YWx1ZSI6IiIsImVuYWJsZWQiOnRydWV9LHsia2V5IjoidGFyZ2V0X3Rlc3RfcGF0aWVudF9pZCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX0seyJrZXkiOiJ0b3RhbCIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZX1d)

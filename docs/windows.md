@@ -2,17 +2,16 @@
 
 ---
 
-Linux containers will run on [Docker Desktop](https://www.docker.com/products/docker-desktop) for Mac, Linux and Windows 10. For Windows Server OS then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers](windows.md)
+Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Linux Containers](linux.md)
 
 ## Launching The Model FHIR Proxy
 
-### Get the source
+### Configuring the Model FHIR Proxy to connect to Postgres
+Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to install Postgres separately but connect to it from the Model FHIR Proxy. To do, so make the following changes to the proxy.env file (located in run/proxy.env):
 
-1. Either navigate to your local repo directory or create one, e.g. `C:\myrepos\` or `~/Repos`
+1. Change to PG_CONNECTION=postgresql://dbuser:dbpassword@dbserveraddress:dbport/fhirstore
 
-2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
-
-3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
+2. The dbserveraddress has to be visible to the container - where the database runs on the same machine as the container then you can use "host.docker.internal" as the server address.
 
 ### Docker Compose
 At the command line:
