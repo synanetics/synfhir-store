@@ -35,7 +35,7 @@ The following steps describe how to get the current version of the Model FHIR Pr
 If you haven't already got it, then please install [git](https://www.git-scm.com). If you prefer, you can install the [github desktop client](https://desktop.github.com)... NOTE: Other git clients are available!
 
 ### Docker
-Docker is required to run ROQR. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine.
+Docker is required to run the Model FHIR Proxy. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine (for Mac, Linux and Windows 10). For Windows Server 2016 and 2019 then please follow the instructions for [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server)
 
 ### Docker Compose
 [Docker Compose](https://docs.docker.com/compose/) affords the ability to "spin up" an entire stack of Docker containers in one simple command. The ROQR repo includes a docker-compose.yml file which defines each service along with the docker command to get the container up and running.
@@ -46,9 +46,12 @@ Docker is required to run ROQR. There are lots of documents which describe the i
 ### Development Environment/Editor
 The flavour of dev enviroment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com), are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
 
+### Postgres (Windows Only)
+The flavour of dev enviroment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com), are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
+
 ---
 
-## Launching The Model FHIR Proxy
+## Launching The Model FHIR Proxy (Linux Container)
 
 ### Get the source
 
