@@ -14,6 +14,7 @@ Currently, the Windows Container distribution does not include the ability to ru
 2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the PG Admin client and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
 
 3. [Create a new login/group role](https://www.pgadmin.org/docs/pgadmin4/4.17/role_dialog.html). 
+  
   * Enter a name (General tab)
   * Enter a password field (Definition tab)
   * Switch all the options in the Privelges tab to Yes
