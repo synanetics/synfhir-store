@@ -6,13 +6,34 @@ Linux Containers will run on [Docker Desktop](https://www.docker.com/products/do
 
 ## Launching The Model FHIR Proxy
 
-### Get the source
+### Windows 10 Docker Desktop Users
 
-1. Either navigate to your local repo directory or create one, e.g. `C:\myrepos\` or `~/Repos`
+1. Please make sure that you are running linux containers [Docker for Windows](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)
 
-2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
+### Configuring the Model FHIR Proxy to connect to Postgres
+The linux distribution also deploys up a containerised instance of Postgres which is useful for development. Users will, however, need to set POSTGRES_USER and POSTGRES_PASSWORD in the db.env file, as well as updating the PG_CONNECTION in proxy.env to reflect these settings, before launching the Model FHIR Proxy.
 
-3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
+From the command line:
+
+1. Change your current directory to run/linux and open the db.env file.
+
+2. Set the POSTGRES_USER value (after the =).
+
+3. Set the POSTGRES_PASSWORD value (after the =).
+
+4. Save the db.env file to keep your changes.
+
+4. Change your current directory to run and open the proxy.env file.
+
+5. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://[USER]:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
+
+6. Change `[USER]` to match POSTGRES_USER (removing the square brackets)
+
+7. Change `[PASSWORD]` to match POSTGRES_PASSWORD (removing the square brackets)
+
+8. Change `[DB_HOST]` to match the server address of your postgres instance. If you are running the containerised version that is part of this repo then this should be `host.docker.internal`
+
+9. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening. If you are running the containerised version that is part of this repo then this should be `5432`
 
 ### Docker Compose
 At the command line:
@@ -23,7 +44,7 @@ At the command line:
 
 3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`
 
-4. Or, should you prefer, bring the server in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up -d`
+4. Or, should you prefer, bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up -d`
 
 5. To tear the containers down, simply enter `docker-compose down`
 
@@ -34,8 +55,8 @@ At the command line:
 
 1. Change to the repo directory (if not already there).
 
-2. Execute `npm run proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+2. Execute `npm run linux:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
-3. Execute `npm run proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+3. Execute `npm run linux:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
-4. To tear down or stop the server, execute one of: `npm run proxy:down` (to tear down) or `npm run proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run proxy:start` next time you wish to spin the server up.
+4. To tear down or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.
