@@ -15,9 +15,9 @@ Currently, the Windows Container distribution does not include the ability to ru
 
 3. [Create a new login/group role](https://www.pgadmin.org/docs/pgadmin4/4.17/role_dialog.html). 
   
-  * Enter a name (General tab)
-  * Enter a password field (Definition tab)
-  * Switch all the options in the Privelges tab to Yes
+   * Enter a name (General tab)
+   * Enter a password field (Definition tab)
+   * Switch all the options in the Privelges tab to Yes
 
   The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
