@@ -9,7 +9,7 @@
     "linux:proxy:start":"cd run/linux && docker-compose start",
     "linux:proxy:stop":"cd run/linux && docker-compose stop",
     "windows:proxy:up": "cd run/windows && docker-compose up",
-    "windows:proxy:up:detached": "cd run/windows run && docker-compose up -d",
+    "windows:proxy:up:detached": "cd /run/windows && docker-compose up -d",
     "windows:proxy:down":"cd run/windows && docker-compose down",
     "windows:proxy:start":"cd run/windows && docker-compose start",
     "windows:proxy:stop":"cd run/windows && docker-compose stop"
