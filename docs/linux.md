@@ -7,8 +7,7 @@ Linux Containers will run on [Docker Desktop](https://www.docker.com/products/do
 ## Launching The Model FHIR Proxy
 
 ### Windows 10 Docker Desktop Users
-
-1. Please make sure that you are running linux containers [Docker for Windows](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)
+Please make sure that you are running linux containers [Docker for Windows](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)
 
 ### Configuring the Model FHIR Proxy to connect to Postgres
 The linux distribution also deploys up a containerised instance of Postgres which is useful for development. Users will, however, need to set POSTGRES_USER and POSTGRES_PASSWORD in the db.env file, as well as updating the PG_CONNECTION in proxy.env to reflect these settings, before launching the Model FHIR Proxy.
@@ -31,9 +30,20 @@ From the command line:
 
 7. Change `[PASSWORD]` to match POSTGRES_PASSWORD (removing the square brackets)
 
-8. Change `[DB_HOST]` to match the server address of your postgres instance. If you are running the containerised version that is part of this repo then this should be `host.docker.internal`
+8. Change `[DB_HOST]` to match the server address of your postgres instance (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `host.docker.internal` 
 
-9. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening. If you are running the containerised version that is part of this repo then this should be `5432`
+9. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `5432`
+
+### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
+At the command line:
+
+1. Change to the repo directory (if not already there).
+
+2. Execute `npm run linux:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+
+3. Execute `npm run linux:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+
+4. To tear down or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.
 
 ### Docker Compose
 At the command line:
@@ -49,14 +59,3 @@ At the command line:
 5. To tear the containers down, simply enter `docker-compose down`
 
 6. You can stop and restart the containers (which will persist data) by using `docker-compose start` and `docker-compose stop` respectively.
-
-### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
-At the command line:
-
-1. Change to the repo directory (if not already there).
-
-2. Execute `npm run linux:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-3. Execute `npm run linux:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-4. To tear down or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.

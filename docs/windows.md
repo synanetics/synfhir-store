@@ -9,6 +9,19 @@ Windows Containers will run on [Docker Enterprise Edition](https://docs.microsof
 ### Configuring the Model FHIR Proxy to connect to Postgres
 Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to install Postgres separately but connect to it from the Model FHIR Proxy. To do, so make the following changes to the proxy.env file (located in run/proxy.env):
 
+1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/) if you have not already done so.
+
+2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the PG Admin client and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
+
+3. [Create a new login/group role](https://www.pgadmin.org/docs/pgadmin4/4.17/role_dialog.html). 
+  * Enter a name (General tab)
+  * Enter a password field (Definition tab)
+  * Switch all the options in the Privelges tab to Yes
+
+  The name and password are what the Model FHIR Proxy will use when connecting to the database.
+
+4. 
+
 1. Change to PG_CONNECTION=postgresql://dbuser:dbpassword@dbserveraddress:dbport/fhirstore
 
 2. The dbserveraddress has to be visible to the container - where the database runs on the same machine as the container then you can use "host.docker.internal" as the server address.
