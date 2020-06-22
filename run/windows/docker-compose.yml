@@ -17,6 +17,11 @@ services:
   proxy:
     image: synaneticsltd/synfhir-store-windows:latest
     container_name: proxy
+    environment: 
+      - NAMESPACE=synfhir-store
+      - METRICSENABLE=false
+      - PORT=3000
+      - SERVICEDIR=services
     env_file:
        - ../proxy.env
     ports:

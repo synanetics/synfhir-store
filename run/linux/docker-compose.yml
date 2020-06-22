@@ -18,6 +18,8 @@ services:
     image: postgres
     container_name: localdb
     restart: always
+    environment: 
+      - POSTGRES_DB=fhirstore
     env_file:
       - db.env
     volumes:
@@ -38,6 +40,11 @@ services:
   proxy:
     image: synaneticsltd/synfhir-store-linux:latest
     container_name: proxy
+    environment: 
+      - NAMESPACE=synfhir-store
+      - METRICSENABLE=false
+      - PORT=3000
+      - SERVICEDIR=services
     env_file:
        - ../proxy.env
     ports:
