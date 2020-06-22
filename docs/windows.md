@@ -6,7 +6,7 @@ Windows Containers will run on [Docker Enterprise Edition](https://docs.microsof
 
 ## Launching The Model FHIR Proxy
 
-### Configuring the Model FHIR Proxy to connect to Postgres
+### Install and configure Postgres to work with the Model FHIR Proxy
 Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to install Postgres separately but connect to it from the Model FHIR Proxy. To do, so make the following changes to the proxy.env file (located in run/proxy.env):
 
 1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/) if you have not already done so.
