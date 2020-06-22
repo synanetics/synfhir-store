@@ -19,7 +19,7 @@ services:
     container_name: localdb
     restart: always
     env_file:
-      - ../db.env
+      - db.env
     volumes:
       - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
     ports:
@@ -29,7 +29,7 @@ services:
     image: dpage/pgadmin4
     container_name: localdb-client
     env_file:
-        - ../dbclient.env
+        - dbclient.env
     ports:
       - 8888:80
     depends_on:
