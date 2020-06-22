@@ -6,26 +6,71 @@ Windows Containers will run on [Docker Enterprise Edition](https://docs.microsof
 
 ## Launching The Model FHIR Proxy
 
-### Install and configure Postgres to work with the Model FHIR Proxy
+### Optional pre-requisites that may help...
+
+1. [Install Chrome](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&hl=en-GB)
+
+2. [Install Notepad++](https://notepad-plus-plus.org)
+
+3. [Install VS Code](https://code.visualstudio.com/download)
+
+### Install Docker Enterprise Edition (Docker EE)
+Further instructions for Docker Enterprise Edition can be found [here](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server)
+
+1. Open PowerShell in elevated/administrator mode
+
+2. Execute: `Install-Module -Name DockerMsftProvider -Repository PSGallery`
+
+3. Execute: `Install-Package -Name docker -ProviderName DockerMsftProvider`
+   
+   * When prompted, type `A` and enter to `Accept All`
+
+4. Execute: `Restart-Computer -Force`
+
+5. When the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by executing: `docker run hello-world`
+
+### Installing and configuring Postgres
 Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to install Postgres separately but connect to it from the Model FHIR Proxy. To do, so make the following changes to the proxy.env file (located in run/proxy.env):
 
 1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/) if you have not already done so.
 
-2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the PG Admin client and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
+2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the [PG Admin client](https://www.pgadmin.org) and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
 
 3. [Create a new login/group role](https://www.pgadmin.org/docs/pgadmin4/4.17/role_dialog.html). 
-  
-   * Enter a name (General tab)
-   * Enter a password field (Definition tab)
-   * Switch all the options in the Privelges tab to Yes
+
+  * Enter `iamonfhir` in the name field (General tab)
+  * Enter a password field (Definition tab)
+  * Switch all the options in the Privelges tab to Yes
 
   The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
-4. 
+### Configuring the Model FHIR Proxy to connect to Postgres
+In PG Admin:
 
-1. Change to PG_CONNECTION=postgresql://dbuser:dbpassword@dbserveraddress:dbport/fhirstore
+1. Select the fhirstore database and [Open the PG Admin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
 
-2. The dbserveraddress has to be visible to the container - where the database runs on the same machine as the container then you can use "host.docker.internal" as the server address.
+2. In the Query Tool window, copy and paste the SQL from the run/windows/db/schema directory and click the [Execute/Refresh](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool_toolbar.html#query-execution) button.
+
+3. Go back to the repo folder and change open run/proxy.env
+
+4. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://iamonfhir:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
+
+5. Change `[PASSWORD]` to match the password configured in step 3 (removing the square brackets)
+
+6. Change `[DB_HOST]` to match the server address of your postgres instance (removing the square brackets).
+
+7. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). By default, this is`5432`
+
+### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
+At the command line:
+
+1. Change to the repo directory (if not already there).
+
+2. Execute `npm run windows:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+
+3. Execute `npm run windows:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+
+4. To tear down or stop the server, execute one of: `npm run windows:proxy:down` (to tear down) or `npm run windows:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run windows:proxy:start` next time you wish to spin the server up.
 
 ### Docker Compose
 At the command line:
@@ -41,14 +86,3 @@ At the command line:
 5. To tear the containers down, simply enter `docker-compose down`
 
 6. You can stop and restart the containers (which will persist data) by using `docker-compose start` and `docker-compose stop` respectively.
-
-### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
-At the command line:
-
-1. Change to the repo directory (if not already there).
-
-2. Execute `npm run proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-3. Execute `npm run proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
-
-4. To tear down or stop the server, execute one of: `npm run proxy:down` (to tear down) or `npm run proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run proxy:start` next time you wish to spin the server up.

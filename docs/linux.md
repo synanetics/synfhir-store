@@ -12,27 +12,23 @@ Please make sure that you are running linux containers [Docker for Windows](http
 ### Configuring the Model FHIR Proxy to connect to Postgres
 The linux distribution also deploys up a containerised instance of Postgres which is useful for development. Users will, however, need to set POSTGRES_USER and POSTGRES_PASSWORD in the db.env file, as well as updating the PG_CONNECTION in proxy.env to reflect these settings, before launching the Model FHIR Proxy.
 
-From the command line:
+From the command line (or a text editor)
 
 1. Change your current directory to run/linux and open the db.env file.
 
-2. Set the POSTGRES_USER value (after the =).
+2. Set the POSTGRES_PASSWORD value (after the =).
 
-3. Set the POSTGRES_PASSWORD value (after the =).
-
-4. Save the db.env file to keep your changes.
+3. Save the db.env file to keep your changes.
 
 4. Change your current directory to run and open the proxy.env file.
 
-5. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://[USER]:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
+5. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://iamonfhir:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
 
-6. Change `[USER]` to match POSTGRES_USER (removing the square brackets)
+6. Change `[PASSWORD]` to match POSTGRES_PASSWORD (removing the square brackets)
 
-7. Change `[PASSWORD]` to match POSTGRES_PASSWORD (removing the square brackets)
+7. Change `[DB_HOST]` to match the server address of your postgres instance (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `host.docker.internal` 
 
-8. Change `[DB_HOST]` to match the server address of your postgres instance (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `host.docker.internal` 
-
-9. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `5432`
+8. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `5432`
 
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
 At the command line:

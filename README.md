@@ -38,7 +38,7 @@ If you haven't already got it, then please install [git](https://www.git-scm.com
 Docker is required to run the Model FHIR Proxy. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine (for Mac, Linux and Windows 10). For Windows Server 2016 and 2019 then please follow the instructions for [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server)
 
 ### Docker Compose
-[Docker Compose](https://docs.docker.com/compose/) affords the ability to "spin up" an entire stack of Docker containers in one simple command. The ROQR repo includes a docker-compose.yml file which defines each service along with the docker command to get the container up and running.
+[Docker Compose](https://docs.docker.com/compose/) affords the ability to "spin up" an entire stack of Docker containers in one simple command. The ROQR repo includes a docker-compose.yml file which defines each service along with the docker command to get the container up and running. Note, Windows Server users should follow the instructions on the `Windows Server Tab` which is about half way down the page.
 
 ### Node.js (Optional)
 [Node](https://nodejs.org/en/) isn't required to run the Model FHIR Proxy, however, this repo comes with npm scripts which make it easier to run the software from a single command line (see below).
@@ -47,19 +47,21 @@ Docker is required to run the Model FHIR Proxy. There are lots of documents whic
 The flavour of dev enviroment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com), are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
 
 ### Postgres (Windows Server)
-[PostgreSQL 11 (for Windows Server 2012 R2, 2016, 2019)](https://www.postgresql.org/download/windows/) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+[PostgreSQL 11.x (for Windows Server 2012 R2, 2016, 2019)](https://www.postgresql.org/download/windows/) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
 ---
 
 ## Launching The Model FHIR Proxy
 
-### Get the source
+### Get the source (requres Git installed)
 
 1. Either navigate to your local repo directory or create one, e.g. `C:\myrepos\` or `~/Repos`
 
 2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
 
 3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
+
+4. From your command line, type: `git checkout -b my-branch-name` This will create a local branch that you can change and modify as you see fit. Feel free to push any changes back to the repo under your branch and pull requests are always welcome.
 
 ### Choose your flavour
 
