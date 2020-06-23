@@ -48,7 +48,7 @@ Docker is required to run the Model FHIR Proxy. There are lots of documents whic
 [Node](https://nodejs.org/en/) isn't required to run the Model FHIR Proxy, however, this repo comes with npm scripts which make it easier to run the software from a single command line call.
 
 ### Development Environment/Editor
-The flavour of dev enviroment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com) are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
+The flavour of dev environment is of course entirely up to you... the Model FHIR Proxy ultimately doesn't care! [VS Code](https://code.visualstudio.com), [Atom](https://atom.io) and [Sublime](https://www.sublimetext.com) are extensible, open source and free. Each environment does have decent Docker integration which can be installed via the usual plugin/extension management features.
 
 ### Postgres (Windows Server)
 [PostgreSQL 11.x (for Windows Server 2012 R2, 2016, 2019)](https://www.postgresql.org/download/windows/) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
