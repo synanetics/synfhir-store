@@ -39,7 +39,7 @@ services:
       - localdb
 
   proxy:
-    image: synaneticsltd/synfhir-store-linux:latest
+    image: synaneticsltd/synfhir-store:linux-latest
     container_name: proxy
     environment: 
       - NAMESPACE=synfhir-store
