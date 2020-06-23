@@ -60,4 +60,4 @@ At the command line:
 
 ### Your done!!
 
-[Run Postman Tests](../README.md)
+[Run Postman Tests](../README.md#run-the-model-fhir-proxy-postman-collection-and-environment)
