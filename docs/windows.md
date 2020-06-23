@@ -4,6 +4,8 @@
 
 Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Linux Containers](linux.md)
 
+---
+
 ## Launching The Model FHIR Proxy
 
 ### Optional pre-requisites that may help...
@@ -77,7 +79,7 @@ At the command line:
 
 1. Change to the repo directory (if not already there).
 
-2. Change your working directory to run: `cd run`
+2. Change your working directory to run: `cd run/windows`
 
 3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`
 
@@ -85,4 +87,8 @@ At the command line:
 
 5. To tear the containers down, simply enter `docker-compose down`
 
-6. You can stop and restart the containers (which will persist data) by using `docker-compose start` and `docker-compose stop` respectively.
+6. You can stop and restart the containers by using `docker-compose start` and `docker-compose stop` respectively.
+
+### Your done!!
+
+[Run Postman Tests](../README.md)

@@ -61,7 +61,7 @@ The flavour of dev enviroment is of course entirely up to you... the Model FHIR 
 
 3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
 
-4. From your command line, type: `git checkout -b my-branch-name` This will create a local branch that you can change and modify as you see fit. Feel free to push any changes back to the repo under your branch and pull requests are always welcome.
+4. From your command line, type: `git checkout -b my-branch-name` where `my-branch-name` is whatever you want to call it (but please not my-branch-name). This will create a local branch that you can change and modify as you see fit. Feel free to push any changes back to the repo under this branch and pull requests are always welcome.
 
 ### Choose your flavour
 
