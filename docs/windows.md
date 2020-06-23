@@ -1,8 +1,8 @@
-# Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers
+# Model FHIR Proxy (Node, Moleculer, PostGres) - Windows Containers
 
 ---
 
-Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Linux Containers](linux.md).
+Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md).
 
 ---
 
@@ -31,10 +31,14 @@ Further instructions for Docker Enterprise Edition can be found [here](https://d
 
 5. When the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by typing `docker run hello-world` in an elevated PowerShell followed by enter.
 
-### Installing and configuring Postgres
-Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to use a separate Postgres instance which can either run within your network, on the same machine (Docker host) as the Model FHIR Proxy or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the Model FHIR Proxy to an instance of Postgres running on your network (or Docker host). If you already have an instance installed then you can skip installation step 1.
+### Installing and configuring PostGres
+Currently, the Windows Container distribution does not include the ability to run PostGres within a Windows Container. As a result, it is necessary to use a separate PostGres instance which can either run on a dedicated machine within your network, on the same machine as the Model FHIR Proxy (Docker host) or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the Model FHIR Proxy to an instance of PostGres running on the Docker host. If you already have an instance installed then you can skip installation step 1.
 
-1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/)
+> The following instructions detail how to configure a PostGres installation to run with the containerised Model FHIR Proxy on the same machine (Docker host). It is recommended that for production deployments, PostGres is run on its own dedicated server that is either hosted inside your network or securely hosted in the cloud as per your own organization's policy and standards. 
+
+1. Install [PostGres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/)
+
+> After installation, please check that Windows Defender Firewall, or any firewall software running on the server, allows inbound TCP/IP and UDP from external sources to the `PostGreSQL Server` service.
 
 2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the [pgAdmin client](https://www.pgadmin.org) and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
 
@@ -42,14 +46,35 @@ Currently, the Windows Container distribution does not include the ability to ru
 
   * Enter `iamonfhir` in the name field (General tab)
   * Enter a password field (Definition tab)
-  * Switch all the options in the Privelges tab to Yes
+  * Switch all the options in the Privileges tab to Yes
 
   The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
-### Configuring the Model FHIR Proxy to connect to Postgres
+### Fetch the Docker Host IP Address
+Requests to PostGres from the Model FHIR Proxy will "appear" to the server as if they are coming from an external machine/host. It is therefore necessary to ascertain the IPv4 address of the Docker host so that it can be used as the `[DB_HOST]` in the `PG_CONNECTION` Model FHIR Proxy environment variable. The IPv4 address will also be required to update the [pg_hba.conf](https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html) to allow non-local connections from the Docker host machine.
+
+In a PowerShell:
+
+1. Execute: `Resolve-DNSName (Hostname) | Select IPAddress | select IPAddress -expandproperty IPAddress | select -last 1`
+
+2. Make a note of the Docker host's IP address.
+
+### Update [pg_hba.conf](https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html) to allow connections from the Docker host
+
+1. Stop the PostGreSQL Server Service
+
+2. Open `C:\Program Files\PostGreSQL\11\data\pg_hba.conf` in a text editor.
+
+3. Under the section called "IPv4 local connections" add a new entry directly underneath line 80 (replacing `[DOCKER_HOST_IP]` with the IPv4 address found in step 1 above):
+
+`host     all       all       [DOCKER_HOST_IP]/32     password`
+
+4. Save the file and restart the PostGreSQL Server Service.
+
+### Configuring the Model FHIR Proxy to connect to PostGres
 In pgAdmin:
 
-1. Select the fhirstore database and [Open the pgAdmin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
+1. Select the fhirstore database and [Open the pgAdmin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html).
 
 2. In the Query Tool window, copy and paste the SQL from the run/windows/db/schema directory and click the [Execute/Refresh](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool_toolbar.html#query-execution) button.
 
@@ -57,16 +82,16 @@ In pgAdmin:
 
 4. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://iamonfhir:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
 
-5. Change `[PASSWORD]` to match the password configured in step 3 of the Installation and configuring Postgres instructions above (removing the square brackets)
+5. Change `[PASSWORD]` to match the password configured in step 3 of the Installation and configuring PostGres instructions above (removing the square brackets).
 
-6. Change `[DB_HOST]` to match the server address of your postgres instance (removing the square brackets). Where Postgres is running on the Docker host then you can use `host.docker.internal` as the DB_HOST address.
+6. Change `[DB_HOST]` to match the server address of your PostGres instance (removing the square brackets) - note if you are running PostGres on the same machine as the Docker host then this will be the IPv4 address found in the "Fetch the Docker Host IP Address" section above. 
 
-7. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening for connections (removing the square brackets). By default, this is`5432`
+7. Change `[DB_PORT]` to match the TCP/IP port that the target PostGres instance is listening for connections (removing the square brackets). By default, this is `5432`.
 
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
 At the command line:
 
-1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`
+1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`.
 
 2. Execute `npm run windows:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
@@ -77,15 +102,15 @@ At the command line:
 ### Docker Compose
 At the command line:
 
-1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`
+1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`.
 
-2. Change your working directory to run: `cd run/windows`
+2. Change your working directory to run: `cd run/windows`.
 
-3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`
+3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`.
 
-4. Or, should you prefer, bring the server in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up -d`
+4. Or, should you prefer, bring the server in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up -d`.
 
-5. To tear the containers down, simply enter `docker-compose down`
+5. To tear the containers down, simply enter `docker-compose down`.
 
 6. You can stop and restart the containers by using `docker-compose start` and `docker-compose stop` respectively.
 
