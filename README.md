@@ -1,7 +1,11 @@
 # Model FHIR Proxy (Node, Moleculer, Postgres)
-[Yorkshire and Humber Care Record](https://yhcr.org)
-
+Web: [Yorkshire and Humber Care Record](https://yhcr.org)  
 Twitter: [@YHCareRecord](https://twitter.com/YHCareRecord/)
+
+Web: [Synanetics](https://synanetics.com)  
+Twitter: [@Synanetics](https://twitter.com/synanetics)
+
+Docker: [synaneticsltd/synfhir-store](https://hub.docker.com/r/synaneticsltd/synfhir-store)  
 
 ---
 
