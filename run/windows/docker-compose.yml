@@ -26,4 +26,11 @@ services:
        - ../proxy.env
     ports:
       - 3001:3000
+    networks:
+        - default
+  
+networks:
+  default:
+    external:
+      name: nat
     
