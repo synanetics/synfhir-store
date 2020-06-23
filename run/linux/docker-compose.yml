@@ -14,21 +14,17 @@ version: "3.2"
 #
 services:
 
-  transport:
-    image: rabbitmq:3-management
-    container_name: transport
-    ports:
-      - 5673:5672
-      - 15673:15672
-
   localdb:
     image: postgres
     container_name: localdb
     restart: always
+    environment: 
+      - POSTGRES_DB=fhirstore
+      - POSTGRES_USER=iamonfhir
     env_file:
       - db.env
     volumes:
-      - ./db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
+      - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
 
@@ -43,13 +39,17 @@ services:
       - localdb
 
   proxy:
-    image: synaneticsltd/synfhir-store:latest
+    image: synaneticsltd/synfhir-store-linux:latest
     container_name: proxy
+    environment: 
+      - NAMESPACE=synfhir-store
+      - METRICSENABLE=false
+      - PORT=3000
+      - SERVICEDIR=services
     env_file:
-       - proxy.env
+       - ../proxy.env
     ports:
       - 3001:3000
     depends_on: 
       - localdb
-      - transport
     
