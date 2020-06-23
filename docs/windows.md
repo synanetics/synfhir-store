@@ -21,22 +21,22 @@ Further instructions for Docker Enterprise Edition can be found [here](https://d
 
 1. Open PowerShell in elevated/administrator mode
 
-2. Execute: `Install-Module -Name DockerMsftProvider -Repository PSGallery`
+2. At the command line enter `Install-Module -Name DockerMsftProvider -Repository PSGallery` followed by return.
 
-3. Execute: `Install-Package -Name docker -ProviderName DockerMsftProvider`
+3. At the command line enter `Install-Package -Name docker -ProviderName DockerMsftProvider` followed by return.
    
-   * When prompted, type `A` and enter to `Accept All`
+   * When prompted, enter `A` and return to Accept All
 
 4. Execute: `Restart-Computer -Force`
 
-5. When the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by executing: `docker run hello-world`
+5. When the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by executing `docker run hello-world` followed by return.
 
 ### Installing and configuring Postgres
-Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to install Postgres separately but connect to it from the Model FHIR Proxy. To do, so make the following changes to the proxy.env file (located in run/proxy.env):
+Currently, the Windows Container distribution does not include the ability to run Postgres within a Windows Container. As a result, it is necessary to use a separate Postgres instance which can either run within your network, on the same machine as the Model FHIR Proxy or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the Model FHIR Proxy to an instance of Postgres - if you already have an instance installed then you can skip installation step 1.
 
-1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/) if you have not already done so.
+1. Install [Postgres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/)
 
-2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the [PG Admin client](https://www.pgadmin.org) and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
+2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the [pgAdmin client](https://www.pgadmin.org) and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
 
 3. [Create a new login/group role](https://www.pgadmin.org/docs/pgadmin4/4.17/role_dialog.html). 
 
@@ -47,13 +47,13 @@ Currently, the Windows Container distribution does not include the ability to ru
   The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
 ### Configuring the Model FHIR Proxy to connect to Postgres
-In PG Admin:
+In pgAdmin:
 
-1. Select the fhirstore database and [Open the PG Admin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
+1. Select the fhirstore database and [Open the pgAdmin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html)
 
 2. In the Query Tool window, copy and paste the SQL from the run/windows/db/schema directory and click the [Execute/Refresh](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool_toolbar.html#query-execution) button.
 
-3. Go back to the repo folder and change open run/proxy.env
+3. Go back to the repo folder open run/proxy.env
 
 4. Find the setting called PG_CONNECTION - it will look similar to this: `PG_CONNECTION=postgresql://iamonfhir:[PASSWORD]@[DB_HOST]:[DB_HOST_PORT]/fhirstore`
 
