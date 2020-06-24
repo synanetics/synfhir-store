@@ -63,7 +63,7 @@ In a PowerShell:
 
 1. Stop the PostGreSQL Server Service
 
-2. Open `C:\Program Files\PostGreSQL\11\data\pg_hba.conf` in a text editor.
+2. Open `[PostGres Installation Path]\PostGreSQL\11\data\pg_hba.conf` in a text editor.
 
 3. Under the section called "IPv4 local connections" add a new entry directly underneath line 80 (replacing `[DOCKER_HOST_IP]` with the IPv4 address found in step 1 above):
 
