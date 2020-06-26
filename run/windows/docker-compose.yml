@@ -17,6 +17,7 @@ services:
   proxy:
     image: synaneticsltd/synfhir-store:windows-latest
     container_name: proxy
+    restart: always
     environment: 
       - NAMESPACE=synfhir-store
       - METRICSENABLE=false

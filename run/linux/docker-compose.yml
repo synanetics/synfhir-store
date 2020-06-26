@@ -41,6 +41,7 @@ services:
   proxy:
     image: synaneticsltd/synfhir-store:linux-latest
     container_name: proxy
+    restart: always
     environment: 
       - NAMESPACE=synfhir-store
       - METRICSENABLE=false
