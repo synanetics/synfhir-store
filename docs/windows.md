@@ -21,15 +21,19 @@ Further instructions for Docker Enterprise Edition can be found [here](https://d
 
 1. Open PowerShell in elevated/administrator mode
 
-2. At the command line enter `Install-Module -Name DockerMsftProvider -Repository PSGallery` (followed by enter to execute the command).
+2. Update the TLS version so that the server can access the PSRepository. At the command line enter `[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12` (followed by enter to execute the command).
 
-3. At the command line enter `Install-Package -Name docker -ProviderName DockerMsftProvider` (followed by enter to execute the command).
+3. At the command line enter `Install-Module -Name DockerMsftProvider -Repository PSGallery` (followed by enter to execute the command).
+
+4. At the command line enter `Install-Package -Name docker -ProviderName DockerMsftProvider` (followed by enter to execute the command).
    
    * When prompted, enter `A` and press enter to Accept All
 
-4. Type `Restart-Computer -Force` followed by enter to execute the command. Probably obvious, but this will restart the server.
+5. Type `Restart-Computer -Force` followed by enter to execute the command. Probably obvious, but this will restart the server.
 
-5. When the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by typing `docker run hello-world` in an elevated PowerShell followed by enter.
+6. For Windows Server 2019: when the Server comes back up, run the `hello-world` Docker Windows Container to test the installation by typing `docker run hello-world` in an elevated PowerShell followed by enter.
+
+> Microsoft has deprecated and removed nanoserver for Windows Server 2016. Windows Server 2016 users should test their Docker installation by typing `docker run docker/surpise:latest` in an elevated PowerShell followed by enter.
 
 ### Installing and configuring PostGres
 Currently, the Windows Container distribution does not include the ability to run PostGres within a Windows Container. As a result, it is necessary to use a separate PostGres instance which can either run on a dedicated machine within your network, on the same machine as the Model FHIR Proxy (Docker host) or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the Model FHIR Proxy to an instance of PostGres running on the Docker host. If you already have an instance installed then you can skip installation step 1.
