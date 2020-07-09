@@ -63,7 +63,7 @@ Currently, the Windows Container distribution does not include the ability to ru
 
 4. Select the `fhirstore` database and [change the owner](https://www.pgadmin.org/docs/pgadmin4/4.23/user_mapping_dialog.html) to `iamonfhir` 
 
-  The name and password are what the Model FHIR Proxy will use when connecting to the database.
+> The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
 ### Fetch the Docker Host IP Address
 Requests to PostGres from the Model FHIR Proxy will "appear" to the server as if they are coming from an external machine/host. It is therefore necessary to ascertain the IPv4 address of the Docker host so that it can be used as the `[DB_HOST]` in the `PG_CONNECTION` Model FHIR Proxy environment variable. The IPv4 address will also be required to update the [pg_hba.conf](https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html) to allow non-local connections from the Docker host machine.
