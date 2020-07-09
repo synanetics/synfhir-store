@@ -8,6 +8,15 @@ Windows Containers will run on [Docker Enterprise Edition](https://docs.microsof
 
 ## Launching The Model FHIR Proxy
 
+### Windows Server Editions
+
+This installation has been tested against the following Windows Server builds:
+
+- Windows 2016 Standard Edition Build 14393
+- Windows 2019 Standard Edition Build 17763
+
+Please ensure that you are using these builds as a minumum.
+
 ### Optional pre-requisites that may help...
 
 1. [Install Chrome](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&hl=en-GB)
@@ -51,6 +60,8 @@ Currently, the Windows Container distribution does not include the ability to ru
   * Enter `iamonfhir` in the name field (General tab)
   * Enter a password field (Definition tab)
   * Switch all the options in the Privileges tab to Yes
+
+4. Select the `fhirstore` database and [change the owner](https://www.pgadmin.org/docs/pgadmin4/4.23/user_mapping_dialog.html) to `iamonfhir` 
 
   The name and password are what the Model FHIR Proxy will use when connecting to the database.
 
