@@ -15,7 +15,7 @@ version: "3.2"
 services:
 
   proxy:
-    image: synaneticsltd/synfhir-store:windows-latest
+    image: synaneticsltd/synfhir-store:windows-sfs-v2.1.0
     container_name: proxy
     restart: always
     environment: 
