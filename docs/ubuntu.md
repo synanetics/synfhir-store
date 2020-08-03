@@ -2,7 +2,7 @@
 
 ---
 
-Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 Docker Desktop please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md).
+For Windows Server OS then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers](windows.md). For Mac, Linux and Windows 10 Docker Desktop please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md).
 
 ---
 
