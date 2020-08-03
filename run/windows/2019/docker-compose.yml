@@ -1,0 +1,37 @@
+version: "3.2"
+#
+# Spin up an instance of the Model FHIR Proxy
+#
+# cd run
+# docker-compose up
+# (docker-compose up -d)
+#
+# OR via npm
+#
+# cd /
+# npm run proxy:up
+# (npm run proxy:up:detached)
+#
+services:
+
+  proxy:
+    image: synaneticsltd/synfhir-store:windows-2019-sfs-v2.2.0
+    container_name: proxy
+    restart: always
+    environment: 
+      - NAMESPACE=synfhir-store
+      - METRICSENABLE=false
+      - PORT=3000
+      - SERVICEDIR=services
+    env_file:
+       - ../proxy.env
+    ports:
+      - 3001:3000
+    networks:
+        - default
+  
+networks:
+  default:
+    external:
+      name: nat
+    

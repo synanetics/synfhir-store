@@ -38,11 +38,11 @@ The following steps describe how to get the current version of the Model FHIR Pr
 ### Git
 If you haven't already got it, then please install [git](https://www.git-scm.com). If you prefer, you can install the [github desktop client](https://desktop.github.com)... NOTE: Other git clients are available!
 
-### Docker
-Docker is required to run the Model FHIR Proxy. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine (for Mac, Linux and Windows 10). For Windows Server 2016 and 2019 then please follow the instructions for [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server)
+### Docker Desktop
+For developers, Docker Desktop is required to run the Model FHIR Proxy. There are lots of documents which describe the installation of [Docker Desktop](https://www.docker.com/products/docker-desktop) and this is all that is needed to run the server on your local machine (for Mac, Linux and Windows 10). Installations on Windows Server 2016, 2019 and Ubuntu are accessible via the links in the [Choose your flavour section](#choose-your-flavour) below.
 
 ### Docker Compose
-[Docker Compose](https://docs.docker.com/compose/) affords the ability to "spin up" an entire stack of Docker containers in one simple command. The Model FHIR Proxy repo includes a docker-compose.yml file which defines each service along with the docker command to get the container up and running. Note, Windows Server users should follow the instructions on the `Windows Server Tab` which is about half way down the page.
+[Docker Compose](https://docs.docker.com/compose/) affords the ability to "spin up" an entire stack of Docker containers in one simple command. The Model FHIR Proxy repo includes a docker-compose.yml file which defines each service along with the docker command to get the container up and running. Installations on Windows Server 2016, 2019 and Ubuntu are accessible via the links in the [Choose your flavour section](#choose-your-flavour) below.
 
 ### Node.js (Optional)
 [Node](https://nodejs.org/en/) isn't required to run the Model FHIR Proxy, however, this repo comes with npm scripts which make it easier to run the software from a single command line call.
@@ -57,11 +57,11 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 
 ## Launching The Model FHIR Proxy
 
-### Get the source (requres Git installed)
+### Get the source (requires Git installed)
 
 1. Either navigate to your local repo directory or create one, e.g. `C:\myrepos\` or `~/Repos`
 
-2. In your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
+2. At your command line type (followed by enter): `git clone https://github.com/synanetics/synfhir-store.git`
 
 3. Open the folder in your development environment and take a few minutes to have a look at the code (if you wish).
 
@@ -72,6 +72,8 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 [Linux Containers - Docker Desktop for Mac, Linux and Windows 10](docs/linux.md)
 
 [Windows Containers - Windows Server](docs/windows.md)
+
+[Linux Containers - Ubuntu](docs/ubuntu.md)
 
 ### Run the Model FHIR Proxy Postman Collection and Environment
 
