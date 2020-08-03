@@ -2,7 +2,7 @@
 
 ---
 
-Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md).
+Windows Containers will run on [Docker Enterprise Edition](https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server). For Mac, Linux and Windows 10 Docker Desktop please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md). For Ubuntu, please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers - Ubuntu 18.04 (Bionic)](ubuntu.md)
 
 ---
 
@@ -51,7 +51,7 @@ Currently, the Windows Container distribution does not include the ability to ru
 
 1. Install [PostGres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/)
 
-> After installation, please check that Windows Defender Firewall, or any firewall software running on the server, allows inbound TCP/IP and UDP from external sources to the `PostGreSQL Server` service.
+> After installation, please check that Windows Defender Firewall, or any firewall software running on the server, allows inbound TCP/IP and UDP from external sources to the `PostGreSQL Server` service (port 5432).
 
 2. [Connect to the database server](https://www.pgadmin.org/docs/pgadmin4/4.17/connecting.html) using the [pgAdmin client](https://www.pgadmin.org) and [create a new database](https://www.pgadmin.org/docs/pgadmin4/4.17/database_dialog.html) named `fhirstore` 
 
@@ -104,22 +104,22 @@ In pgAdmin:
 7. Change `[DB_PORT]` to match the TCP/IP port that the target PostGres instance is listening for connections (removing the square brackets). By default, this is `5432`.
 
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
-At the command line:
+At the command line (where `[os]` is one of 2016 or 2019 depending on your Windows Server version):
 
 1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`.
 
-2. Execute `npm run windows:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+2. Execute `npm run windows:[os]:proxy:up` to bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
-3. Execute `npm run windows:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
+3. Execute `npm run windows:[os]:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
-4. To tear down or stop the server, execute one of: `npm run windows:proxy:down` (to tear down) or `npm run windows:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run windows:proxy:start` next time you wish to spin the server up.
+4. To tear down or stop the server, execute one of: `npm run windows:[os]:proxy:down` (to tear down) or `npm run windows:[os]:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run windows:[os]:proxy:start` next time you wish to spin the server up.
 
 ### Docker Compose
-At the command line:
+At the command line (where `[os]` is one of 2016 or 2019 depending on your Windows Server version):
 
 1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`.
 
-2. Change your working directory to run: `cd run/windows`.
+2. Change your working directory to run: `cd run/windows/[os]`.
 
 3. Bring the server up in [interactive](https://docs.docker.com/engine/reference/commandline/exec/) mode, by executing `docker-compose up`.
 
@@ -129,6 +129,6 @@ At the command line:
 
 6. You can stop and restart the containers by using `docker-compose start` and `docker-compose stop` respectively.
 
-### Your done!!
+### You're done!!
 
 [Run Postman Tests](../README.md#run-the-model-fhir-proxy-postman-collection-and-environment)
