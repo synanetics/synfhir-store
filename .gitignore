@@ -61,4 +61,6 @@ typings/
 .idea
 
 # SSL config
-ssl/certs
+*.crt
+*.key
+*.pem
