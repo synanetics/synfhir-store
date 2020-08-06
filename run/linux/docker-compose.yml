@@ -27,6 +27,8 @@ services:
       - ../db/schema/init.txt:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5432:5432
+    networks:
+      - internal
 
   localdb-client:
     image: dpage/pgadmin4
@@ -34,13 +36,14 @@ services:
     env_file:
         - dbclient.env
     ports:
-      - 8888:80
+      - 54321:80
     depends_on:
       - localdb
+    networks:
+      - internal
 
   proxy:
     image: synaneticsltd/synfhir-store:linux-latest
-    container_name: proxy
     restart: always
     environment: 
       - NAMESPACE=synfhir-store
@@ -49,8 +52,36 @@ services:
       - SERVICEDIR=services
     env_file:
        - ../proxy.env
-    ports:
-      - 3001:3000
     depends_on: 
       - localdb
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
+      - "traefik.http.services.proxy.loadbalancer.server.port=3000"
+      - "traefik.http.routers.proxy.entrypoints=secure"
+      - "traefik.http.routers.proxy.tls=true"
+      - "traefik.http.routers.proxy.tls.domains[0].main=fhir.local"
+    networks:
+      - internal
+
+  traefik:
+    image: traefik:v2.2
+    ports:
+      - 443:443
+      - 80:80
+      - 8080:8080
+    depends_on: 
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ../../ssl/certs/:/etc/traefik/certs
+      - ../../ssl/config/static.toml:/etc/traefik/traefik.toml
+      - ../../ssl/config/dynamic.toml:/etc/traefik/dynamic_conf.toml
+    networks:
+      - internal
+      - default
+
+networks:
+  internal:
+  
     
