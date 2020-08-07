@@ -60,11 +60,11 @@ services:
       - "traefik.http.services.proxy.loadbalancer.server.port=3000"
       - "traefik.http.routers.proxy.entrypoints=secure"
       - "traefik.http.routers.proxy.tls=true"
-      - "traefik.http.routers.proxy.tls.domains[0].main=fhir.local"
+      - "traefik.http.routers.proxy.tls.domains[0].main=mfp.sandpit.yhcr.nhs.uk"
     networks:
       - internal
 
-  traefik:
+  proxy-ssl:
     image: traefik:v2.2
     ports:
       - 443:443
