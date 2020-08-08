@@ -64,3 +64,5 @@ typings/
 *.crt
 *.key
 *.pem
+*.csr
+*.cnf

@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.7"
 #
 # Spin up an instance of the Model FHIR Proxy
 #
@@ -24,14 +24,35 @@ services:
       - PORT=3000
       - SERVICEDIR=services
     env_file:
-       - ../proxy.env
-    ports:
-      - 3001:3000
+       - ../../proxy.env
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
+    - "traefik.http.services.proxy.loadbalancer.server.port=3000"
+    - "traefik.http.routers.proxy.entrypoints=secure"
+    - "traefik.http.routers.proxy.tls=true"
+    - "traefik.http.routers.proxy.tls.domains[0].main=mfp.sandpit.yhcr.nhs.uk"
     networks:
-        - default
-  
-networks:
-  default:
-    external:
-      name: nat
+      - internal
+      
+  proxy-ssl:
+    image: synaneticsltd/synfhir-windows-traefik:ltsc2019
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    depends_on: 
+      - proxy
+    volumes:
+      - ../../../ssl/:C:\etc\traefik\certs
+      - ../../../ssl/config:C:\etc\traefik
+      - source: \\.\pipe\docker_engine
+        target: \\.\pipe\docker_engine
+        type: npipe
+    networks:
+      - internal
+      - default
     
+networks:
+  internal:
+  default:

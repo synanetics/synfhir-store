@@ -1,3 +1,5 @@
+
+
 [entrypoints.insecure]
     address = ":80"
 
@@ -14,6 +16,7 @@
     [providers.docker]
         exposedbydefault = false
         watch = true
+        endpoint = "npipe:////./pipe/docker_engine"
     [providers.file]
         filename="/etc/traefik/dynamic_conf.toml"
         watch = true
