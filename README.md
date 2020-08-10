@@ -72,7 +72,7 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 
 ### SSL Certificates
 
-> The Model FHIR Proxy requires https to run - you can use self-signed certificates for standalone development purposes. If you have a CA signed certificate then you should use that instead.
+> The Model FHIR Proxy requires https to run - if you do not have a CA signed certificate then you can use self-signed certificates for standalone development purposes.
 
 ### Choose your flavour
 
