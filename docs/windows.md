@@ -103,6 +103,17 @@ In pgAdmin:
 
 7. Change `[DB_PORT]` to match the TCP/IP port that the target PostGres instance is listening for connections (removing the square brackets). By default, this is `5432`.
 
+### Configure SSL
+The Model FHIR Proxy contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the Model FHIR Proxy uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
+
+1. Copy your certificate and private key files to the `/ssl/certs` directory of this repo.
+
+2. Rename your certificate file to `fhir.proxy.crt`
+
+3. Rename your private key file to `fhir.proxy.key`
+
+> The Model FHIR Proxy requires https to run
+
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
 At the command line (where `[os]` is one of 2016 or 2019 depending on your Windows Server version):
 
