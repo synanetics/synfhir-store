@@ -46,6 +46,8 @@ services:
     volumes:
       - ../../../ssl/:C:\etc\traefik\certs
       - ../../../ssl/config:C:\etc\traefik
+      - ../../../ssl/config/windows:C:\etc\traefik
+
       - source: \\.\pipe\docker_engine
         target: \\.\pipe\docker_engine
         type: npipe

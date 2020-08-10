@@ -1,0 +1,22 @@
+[entrypoints.insecure]
+    address = ":80"
+
+    [entrypoints.insecure.http]
+        [entrypoints.insecure.http.redirections]
+            [entrypoints.insecure.http.redirections.entryPoint]
+                to = "secure"
+                scheme = "https"
+
+[entrypoints.secure]
+    address = ":443"
+
+[providers]
+    [providers.docker]
+        exposedbydefault = false
+        watch = true
+    [providers.file]
+        filename="/etc/traefik/dynamic_conf.toml"
+        watch = true
+
+[api]
+    insecure = true
