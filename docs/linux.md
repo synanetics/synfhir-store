@@ -56,6 +56,8 @@ At the command line:
 
 4. To tear down (and trash any data created) or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.
 
+5. You can specify the number of Model FHIR Proxy instances to run behind the load balancer by `INSTANCES=n npm run linux:proxy:up` (where n is the desired number of instances).
+
 ### Docker Compose
 At the command line:
 
