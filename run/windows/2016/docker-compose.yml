@@ -15,7 +15,8 @@ version: "3.2"
 services:
 
   proxy:
-    image: synaneticsltd/synfhir-store:windows-2016-latest
+    image: synaneticsltd/synfhir-store:windows-2019-latest
+    container_name: proxy
     restart: always
     environment: 
       - NAMESPACE=synfhir-store
@@ -23,37 +24,36 @@ services:
       - PORT=3000
       - SERVICEDIR=services
     env_file:
-       - ../proxy.env
+       - ../../proxy.env
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
-      - "traefik.http.services.proxy.loadbalancer.server.port=3000"
-      - "traefik.http.routers.proxy.entrypoints=secure"
-      - "traefik.http.routers.proxy.tls=true"
-      - "traefik.http.routers.proxy.tls.domains[0].main=fhir.local"
+    - "traefik.enable=true"
+    - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
+    - "traefik.http.services.proxy.loadbalancer.server.port=3000"
+    - "traefik.http.routers.proxy.entrypoints=secure"
+    - "traefik.http.routers.proxy.tls=true"
+    - "traefik.http.routers.proxy.tls.domains[0].main=mfp.sandpit.yhcr.nhs.uk"
     networks:
-        - internal
-
+      - internal
+      
   proxy-ssl:
     image: synaneticsltd/synfhir-windows-traefik:ltsc2016
+    command: "--configFile=C:/etc/traefik/windows/traefik.toml"
     ports:
-      - 443:443
       - 80:80
+      - 443:443
       - 8080:8080
     depends_on: 
       - proxy
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ../../ssl/certs/:/etc/traefik/certs
-      - ../../ssl/config/static.toml:/etc/traefik/traefik.toml
-      - ../../ssl/config/dynamic.toml:/etc/traefik/dynamic_conf.toml
+      - ../../../ssl/certs:C:\etc\traefik\certs
+      - ../../../ssl/config:C:\etc\traefik
+      - source: \\.\pipe\docker_engine
+        target: \\.\pipe\docker_engine
+        type: npipe
     networks:
       - internal
       - default
-  
+    
 networks:
   internal:
   default:
-    external:
-      name: nat
-    

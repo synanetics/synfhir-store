@@ -37,6 +37,7 @@ services:
       
   proxy-ssl:
     image: synaneticsltd/synfhir-windows-traefik:ltsc2019
+    command: "--configFile=C:/etc/traefik/windows/traefik.toml"
     ports:
       - 80:80
       - 443:443
@@ -44,10 +45,8 @@ services:
     depends_on: 
       - proxy
     volumes:
-      - ../../../ssl/:C:\etc\traefik\certs
+      - ../../../ssl/certs:C:\etc\traefik\certs
       - ../../../ssl/config:C:\etc\traefik
-      - ../../../ssl/config/windows:C:\etc\traefik
-
       - source: \\.\pipe\docker_engine
         target: \\.\pipe\docker_engine
         type: npipe
