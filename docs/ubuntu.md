@@ -73,6 +73,8 @@ The Model FHIR Proxy contains an open source reverse proxy and load balancer sol
 
 3. Rename your private key file to `fhir.proxy.key`
 
+4. Open linux/.env and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed.
+
 > The Model FHIR Proxy requires https to run
 
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)

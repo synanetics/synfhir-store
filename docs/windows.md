@@ -112,7 +112,7 @@ The Model FHIR Proxy contains an open source reverse proxy and load balancer sol
 
 3. Rename your private key file to `fhir.proxy.key`
 
-4. Open `windows/[os]/.env` and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed ((where `[os]` is one of 2016 or 2019 depending on your Windows Server version)
+4. Open `windows/[os]/.env` and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed (where `[os]` is one of 2016 or 2019 depending on your Windows Server version)
 
 > The Model FHIR Proxy requires https to run
 
