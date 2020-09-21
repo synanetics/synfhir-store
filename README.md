@@ -86,6 +86,10 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 
 [Model FHIR Proxy Postman Collection](docs/postman.md)
 
+### Updating the Model FHIR Proxy container
+
+[How to update a Model FHIR Proxy container](docs/updating-model-fhir-store.md)
+
 ---
 
 ### Issues/Feedback
