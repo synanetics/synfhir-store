@@ -37,7 +37,7 @@ services:
       
   proxy-ssl:
     image: synaneticsltd/synfhir-windows-traefik:ltsc2019
-    command: "--configFile=C:/etc/traefik/windows/traefik.toml"
+    command: "--configFile=C:/etc/traefik/windows/2019/traefik.toml"
     ports:
       - 80:80
       - 443:443
