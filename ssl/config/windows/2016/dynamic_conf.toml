@@ -1,0 +1,16 @@
+[http]
+    [http.routers]
+        [http.routers.proxy]
+            rule="Host(``) && PathPrefix(`/fhir`)"
+            service="proxy"
+            entryPoints=["secure"]
+        [http.routers.proxy.tls]
+
+    [http.services]
+        [http.services.proxy.loadBalancer]
+            [[http.services.proxy.loadBalancer.servers]]
+                url=
+                
+[[tls.certificates]]
+    certFile = "fhir.proxy.crt"
+    keyFile = "fhir.proxy.key"

@@ -1,0 +1,20 @@
+[entryPoints]
+    [entryPoints.insecure]
+        address = ":80"
+
+        [entryPoints.insecure.http]
+            [entryPoints.insecure.http.redirections]
+                [entryPoints.insecure.http.redirections.entryPoint]
+                    to = "secure"
+                    scheme = "https"
+
+    [entryPoints.secure]
+        address = ":443"
+
+    [providers]
+        [providers.file]
+            filename="dynamic_conf.toml"
+            watch = true
+
+    [api]
+        insecure = true
