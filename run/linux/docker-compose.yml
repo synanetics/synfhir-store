@@ -60,7 +60,7 @@ services:
       - "traefik.http.services.proxy.loadbalancer.server.port=3000"
       - "traefik.http.routers.proxy.entrypoints=secure"
       - "traefik.http.routers.proxy.tls=true"
-      - "traefik.http.routers.proxy.tls.domains[0].main=mfp.sandpit.yhcr.nhs.uk"
+      - "traefik.http.routers.proxy.tls.domains[0].main=${SSL_CERTIFICATE_CN}"
     networks:
       - internal
 

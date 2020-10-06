@@ -53,6 +53,9 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 ### Postgres (Windows Server)
 [PostgreSQL 11.x (for Windows Server 2012 R2, 2016, 2019)](https://www.postgresql.org/download/windows/) is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
 
+### Traefik (SSL proxy and load balancer)
+[Traefik](https://containo.us/traefik/) is a leading modern reverse proxy and load balancer that makes deploying microservices easy. Traefik integrates with your existing infrastructure components and configures itself automatically and dynamically.
+
 ---
 
 ## Launching The Model FHIR Proxy
@@ -67,6 +70,10 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 
 4. From your command line, type: `git checkout -b my-branch-name` where `my-branch-name` is whatever you want to call it (but please do not call it my-branch-name - lets be creative, people). This will create a local branch that you can change and modify as you see fit. Feel free to push any changes back to the repo under this branch - pull requests are always welcome.
 
+### SSL Certificates
+
+> The Model FHIR Proxy requires https to run - if you do not have a CA signed certificate then you can use self-signed certificates for standalone development purposes.
+
 ### Choose your flavour
 
 [Linux Containers - Docker Desktop for Mac, Linux and Windows 10](docs/linux.md)
@@ -78,6 +85,10 @@ The flavour of dev environment is of course entirely up to you... the Model FHIR
 ### Run the Model FHIR Proxy Postman Collection and Environment
 
 [Model FHIR Proxy Postman Collection](docs/postman.md)
+
+### Updating the Model FHIR Proxy container
+
+[How to update a Model FHIR Proxy container](docs/updating-model-fhir-store.md)
 
 ---
 

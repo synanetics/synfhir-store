@@ -64,6 +64,19 @@ From the command line (or a text editor):
 
 8. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `5432`.
 
+### Configure SSL
+The Model FHIR Proxy contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the Model FHIR Proxy uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
+
+1. Copy your certificate and private key files to the `/ssl/certs` directory of this repo.
+
+2. Rename your certificate file to `fhir.proxy.crt`
+
+3. Rename your private key file to `fhir.proxy.key`
+
+4. Open linux/.env and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed.
+
+> The Model FHIR Proxy requires https to run
+
 ### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
 At the command line:
 
@@ -74,6 +87,8 @@ At the command line:
 3. Execute `npm run linux:proxy:up:detached` to bring the server up in [detached](https://docs.docker.com/engine/reference/commandline/exec/) mode.
 
 4. To tear down (and trash any data) or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.
+
+5. You can specify the number of Model FHIR Proxy instances to run behind the load balancer by `INSTANCES=n npm run linux:proxy:up` (where n is the desired number of instances).
 
 ### Docker Compose
 At the command line:
