@@ -1,4 +1,5 @@
-# Configuring SSL for Windows 2016 Server 
+# Configuring SSL for Windows 2016 Server
+
 ---
 
 The following instructions are specific to Windows 2016 Server only. Windows 2019 Server users should follow these instructions: [Configure SSL for Windows 2019](windows.md#configure-ssl).
@@ -17,8 +18,8 @@ The following instructions are specific to Windows 2016 Server only. Windows 201
 
 3. Open `/ssl/windows/2016/dynamic_conf.toml`
 
-    -  On line 4 replace `Host(``)` with `Host(`[your-host-name]`)` where `[your-host-name]` is the CN of your SSL server certificate (please ensure you type between the back-tick characters). Save the changes.
-    -  On line 12 type `http://[docker-host-ip]:3000` immediately after the `url=`, where `[docker-host-ip]` is the IP address of your docker host.
+   - On line 4 replace ` Host(``) ` with `Host(`[your-host-name]`)` where `[your-host-name]` is the CN of your SSL server certificate (please ensure you type between the back-tick characters). Save the changes.
+   - On line 12 type `http://[docker-host-ip]:3000` immediately after the `url=`, where `[docker-host-ip]` is the IP address of your docker host.
 
 4. Copy both `/ssl/windows/2016/dynamic_conf.toml` and `/ssl/windows/2016/traefik.toml` to `C:\Program Files\traefik`
 
@@ -26,8 +27,8 @@ The following instructions are specific to Windows 2016 Server only. Windows 201
 
 6. Open a Powershell console with elevated persmissions and enter `cd C:\Program Files\traefik`.
 
-7. Run the SSL termination proxy by typing `./traefik` followed by enter then minimise the console window. To confirm the SSL proxy is up and running browse to `http://localhost:8080` to view it's configuration.  Full details that describe the Traefik dashboard are available [here](https://doc.traefik.io/traefik/operations/dashboard/)
+7. Run the SSL termination proxy by typing `./traefik` followed by enter then minimise the console window. To confirm the SSL proxy is up and running browse to `http://localhost:8080` to view it's configuration. Full details that describe the Traefik dashboard are available [here](https://doc.traefik.io/traefik/operations/dashboard/)
 
 ### Start the Model FHIR Proxy
 
-[Model FHIR Proxy (Node, Moleculer, Postgres)](windows.md#starting-the-model-fhir-proxy-using)
+[Model FHIR Proxy (Node, Moleculer, Postgres)](windows.md#starting-the-model-fhir-proxy-using-npm)
