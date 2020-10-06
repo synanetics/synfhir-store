@@ -76,7 +76,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ../../ssl/certs/:/etc/traefik/certs
       - ../../ssl/config/linux/traefik.toml:/etc/traefik/traefik.toml
-      - ../../ssl/config/dynamic_conf.toml:/etc/traefik/dynamic_conf.toml
+      - ../../ssl/config/linux/dynamic_conf.toml:/etc/traefik/dynamic_conf.toml
     networks:
       - internal
       - default
