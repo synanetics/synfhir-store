@@ -104,6 +104,9 @@ In pgAdmin:
 7. Change `[DB_PORT]` to match the TCP/IP port that the target PostGres instance is listening for connections (removing the square brackets). By default, this is `5432`.
 
 ### Configure SSL
+
+> Windows 2016 Server users please follow these instructions that are specific to your environment: [Configuring SSL for Windows 2016 Server](windows-2016-traefik.md)
+
 The Model FHIR Proxy contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the Model FHIR Proxy uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
 
 1. Copy your certificate and private key files to the `/ssl/certs` directory of this repo.
