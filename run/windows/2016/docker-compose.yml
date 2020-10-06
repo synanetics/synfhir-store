@@ -29,3 +29,17 @@ services:
        - 3001:3000
     networks:
       - default
+
+  proxy-ssl:
+    image: synaneticsltd/synfhir-windows-traefik:ltsc2016
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    depends_on: 
+      - proxy
+    volumes:
+      - ../../../ssl/certs:C:\etc\traefik\certs
+      - ../../../ssl/config/windows/2016:C:\etc\traefik
+    networks:
+      - default
