@@ -19,7 +19,7 @@ The following instructions are specific to Windows 2016 Server only. Windows 201
 3. Open `/ssl/windows/2016/dynamic_conf.toml`
 
    - On line 4 replace ` Host(``) ` with `Host(`[your-host-name]`)` where `[your-host-name]` is the CN of your SSL server certificate (please ensure you type between the back-tick characters). Save the changes.
-   - On line 12 type `"http://[docker-host-ip]:[docker-host-port]"` immediately after the `url=`, where `[docker-host-ip]` is the IP address of your docker host and `[docker-host-port]` is that which the Model FHIR Proxy software is running. Please ensure that the url is enclosed with double quotes.
+   - On line 12 type `"http://[docker-host-ip]:[docker-host-port]"` immediately after the `url=`, where `[docker-host-ip]` is the IP address of your docker host and `[docker-host-port]` is that which the Model FHIR Proxy software is running. Please ensure that the url is enclosed in double quotes.
 
 4. Copy both `/ssl/windows/2016/dynamic_conf.toml` and `/ssl/windows/2016/traefik.toml` to `C:\Program Files\traefik`
 
