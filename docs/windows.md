@@ -1,12 +1,12 @@
-# Model FHIR Proxy (Node, Moleculer, PostGres) - Windows Containers
+# FHIR Appliance (Node, Moleculer, PostGres) - Windows Containers
 
 ---
 
- For Mac, Linux and Windows 10 Docker Desktop please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers](linux.md). For Ubuntu, please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers - Ubuntu 18.04 (Bionic)](ubuntu.md)
+ For Mac, Linux and Windows 10 Docker Desktop please refer to [FHIR Appliance (Node, Moleculer, PostGres) - Linux Containers](linux.md). For Ubuntu, please refer to [FHIR Appliance (Node, Moleculer, PostGres) - Linux Containers - Ubuntu 18.04 (Bionic)](ubuntu.md)
 
 ---
 
-## Launching The Model FHIR Proxy
+## Launching The FHIR Appliance
 
 ### Windows Server Editions
 
@@ -45,9 +45,9 @@ Further instructions for Docker Enterprise Edition can be found [here](https://d
 > Microsoft has deprecated and removed nanoserver for Windows Server 2016. Windows Server 2016 users should test their Docker installation by typing `docker run docker/surprise:latest` in an elevated PowerShell followed by enter.
 
 ### Installing and configuring PostGres
-Currently, the Windows Container distribution does not include the ability to run PostGres within a Windows Container. As a result, it is necessary to use a separate PostGres instance which can either run on a dedicated machine within your network, on the same machine as the Model FHIR Proxy (Docker host) or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the Model FHIR Proxy to an instance of PostGres running on the Docker host. If you already have an instance installed then you can skip installation step 1.
+Currently, the Windows Container distribution does not include the ability to run PostGres within a Windows Container. As a result, it is necessary to use a separate PostGres instance which can either run on a dedicated machine within your network, on the same machine as the FHIR Appliance (Docker host) or in the cloud. The following instructions describe the installation and configuration steps necessary to connect the FHIR Appliance to an instance of PostGres running on the Docker host. If you already have an instance installed then you can skip installation step 1.
 
-> The following instructions detail how to configure a PostGres installation to run with the containerised Model FHIR Proxy on the same machine (Docker host). It is recommended that for production deployments, PostGres is run on its own dedicated server that is either hosted inside your network or securely hosted in the cloud as per your own organization's policy and standards. 
+> The following instructions detail how to configure a PostGres installation to run with the containerised FHIR Appliance on the same machine (Docker host). It is recommended that for production deployments, PostGres is run on its own dedicated server that is either hosted inside your network or securely hosted in the cloud as per your own organization's policy and standards. 
 
 1. Install [PostGres 11.x x86-64](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads/)
 
@@ -63,10 +63,10 @@ Currently, the Windows Container distribution does not include the ability to ru
 
 4. Select the `fhirstore` database and [change the owner](https://www.pgadmin.org/docs/pgadmin4/4.23/user_mapping_dialog.html) to `iamonfhir` 
 
-> The name and password are what the Model FHIR Proxy will use when connecting to the database.
+> The name and password are what the FHIR Appliance will use when connecting to the database.
 
 ### Fetch the Docker Host IP Address
-Requests to PostGres from the Model FHIR Proxy will "appear" to the server as if they are coming from an external machine/host. It is therefore necessary to ascertain the IPv4 address of the Docker host so that it can be used as the `[DB_HOST]` in the `PG_CONNECTION` Model FHIR Proxy environment variable. The IPv4 address will also be required to update the [pg_hba.conf](https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html) to allow non-local connections from the Docker host machine.
+Requests to PostGres from the FHIR Appliance will "appear" to the server as if they are coming from an external machine/host. It is therefore necessary to ascertain the IPv4 address of the Docker host so that it can be used as the `[DB_HOST]` in the `PG_CONNECTION` FHIR Appliance environment variable. The IPv4 address will also be required to update the [pg_hba.conf](https://www.postgresql.org/docs/9.2/auth-pg-hba-conf.html) to allow non-local connections from the Docker host machine.
 
 In a PowerShell:
 
@@ -86,7 +86,7 @@ In a PowerShell:
 
 4. Save the file and restart the PostGreSQL Server Service.
 
-### Configuring the Model FHIR Proxy to connect to PostGres
+### Configuring the FHIR Appliance to connect to PostGres
 In pgAdmin:
 
 1. Select the fhirstore database and [Open the pgAdmin Query Tool](https://www.pgadmin.org/docs/pgadmin4/latest/query_tool.html).
@@ -107,7 +107,7 @@ In pgAdmin:
 
 > Windows 2016 Server users please follow these instructions that are specific to your environment: [Configuring SSL for Windows 2016 Server](windows-2016-traefik.md)
 
-The Model FHIR Proxy contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the Model FHIR Proxy uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
+The FHIR Appliance contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the FHIR Appliance uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
 
 1. Copy your certificate and private key files to the `/ssl/certs` directory of this repo.
 
@@ -117,9 +117,9 @@ The Model FHIR Proxy contains an open source reverse proxy and load balancer sol
 
 4. Open `windows/[os]/.env` and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed (where `[os]` is one of 2016 or 2019 depending on your Windows Server version)
 
-> The Model FHIR Proxy requires https to run
+> The FHIR Appliance requires https to run
 
-### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
+### Starting the FHIR Appliance using [npm](https://www.npmjs.com)
 At the command line (where `[os]` is one of 2016 or 2019 depending on your Windows Server version):
 
 1. Change to the repo directory (if not already there), e.g. `cd C:\repos\synfhir-store`.

@@ -1,20 +1,20 @@
-# Model FHIR Proxy (Node, Moleculer, Postgres) - Linux Containers
+# FHIR Appliance (Node, Moleculer, Postgres) - Linux Containers
 
 ---
 
-For Windows Server OS then please refer to [Model FHIR Proxy (Node, Moleculer, Postgres) - Windows Containers](windows.md). For Ubuntu, please refer to [Model FHIR Proxy (Node, Moleculer, PostGres) - Linux Containers - Ubuntu 18.04 (Bionic)](ubuntu.md)
+For Windows Server OS then please refer to [FHIR Appliance (Node, Moleculer, Postgres) - Windows Containers](windows.md). For Ubuntu, please refer to [FHIR Appliance (Node, Moleculer, PostGres) - Linux Containers - Ubuntu 18.04 (Bionic)](ubuntu.md)
 
 ---
 
-## Launching The Model FHIR Proxy
+## Launching The FHIR Appliance
 
 ### Windows 10 Docker Desktop Users
 Please make sure that you are running linux containers [Docker for Windows](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers).
 
-### Configuring the Model FHIR Proxy to connect to Postgres
-The linux distribution also deploys up a containerised instance of Postgres which is useful for development. Users will, however, need to set POSTGRES_PASSWORD in the db.env file, as well as updating the PG_CONNECTION in proxy.env to reflect these settings, before launching the Model FHIR Proxy.
+### Configuring the FHIR Appliance to connect to Postgres
+The linux distribution also deploys up a containerised instance of Postgres which is useful for development. Users will, however, need to set POSTGRES_PASSWORD in the db.env file, as well as updating the PG_CONNECTION in proxy.env to reflect these settings, before launching the FHIR Appliance.
 
-> The following instructions detail how to configure a Postgres installation to run with the containerised Model FHIR Proxy on the same machine (Docker host). It is recommended that for production deployments, Postgres is run on its own dedicated server that is either hosted inside your network or securely hosted in the cloud.
+> The following instructions detail how to configure a Postgres installation to run with the containerised FHIR Appliance on the same machine (Docker host). It is recommended that for production deployments, Postgres is run on its own dedicated server that is either hosted inside your network or securely hosted in the cloud.
 
 From the command line (or a text editor):
 
@@ -35,7 +35,7 @@ From the command line (or a text editor):
 8. Change `[DB_PORT]` to match the TCP/IP port that the target postgres instance is listening (removing the square brackets). If you are running the containerised version that is part of this repo then this should be `5432`.
 
 ### Configure SSL
-The Model FHIR Proxy contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the Model FHIR Proxy uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
+The FHIR Appliance contains an open source reverse proxy and load balancer solution called [Traefik](https://containo.us/traefik/). Primarily, the FHIR Appliance uses this component as a means to enable HTTPS communication and can be used with both self-signed (for development) and CA signed certificates. To configure the Traefik container:
 
 1. Copy your certificate and private key files to the `/ssl/certs` directory of this repo.
 
@@ -45,9 +45,9 @@ The Model FHIR Proxy contains an open source reverse proxy and load balancer sol
 
 4. Open linux/.env and set the `SSL_CERTIFICATE_CN` environment variable to the server name where the certificate is installed.
 
-> The Model FHIR Proxy requires https to run
+> The FHIR Appliance requires https to run
 
-### Starting the Model FHIR Proxy using [npm](https://www.npmjs.com)
+### Starting the FHIR Appliance using [npm](https://www.npmjs.com)
 At the command line:
 
 1. Change to the repo directory (if not already there).
@@ -58,7 +58,7 @@ At the command line:
 
 4. To tear down (and trash any data created) or stop the server, execute one of: `npm run linux:proxy:down` (to tear down) or `npm run linux:proxy:stop` (to stop). Using the stop command here means that you can simply execute `npm run linux:proxy:start` next time you wish to spin the server up.
 
-5. You can specify the number of Model FHIR Proxy instances to run behind the load balancer by `INSTANCES=n npm run linux:proxy:up` (where n is the desired number of instances).
+5. You can specify the number of FHIR Appliance instances to run behind the load balancer by `INSTANCES=n npm run linux:proxy:up` (where n is the desired number of instances).
 
 ### Docker Compose
 At the command line:

@@ -1,12 +1,12 @@
-# How to update a Model FHIR Proxy container
+# How to update a FHIR Appliance container
 
 ---
 
-Updates to the Model FHIR Proxy are released regularly and to ensure that you are running the latest version please follow the instructions below.
+Updates to the FHIR Appliance are released regularly and to ensure that you are running the latest version please follow the instructions below.
 
 ---
 
-## Updating The Model FHIR Proxy Docker Container
+## Updating The FHIR Appliance Docker Container
 
 ### Docker Compose
 
@@ -18,4 +18,4 @@ From the command line (Windows users should ensure that they are running either 
 
 ### You're done!!
 
-[Model FHIR Proxy (Node, Moleculer, Postgres)](../README.md)
+[FHIR Appliance (Node, Moleculer, Postgres)](../README.md)

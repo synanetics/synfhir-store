@@ -1,6 +1,6 @@
 version: "3.7"
 #
-# Spin up an instance of the Model FHIR Proxy
+# Spin up an instance of the FHIR Appliance
 #
 # cd run
 # docker-compose up
@@ -13,28 +13,27 @@ version: "3.7"
 # (npm run proxy:up:detached)
 #
 services:
-
   proxy:
     image: synaneticsltd/synfhir-store:windows-2019-latest
     container_name: proxy
     restart: always
-    environment: 
+    environment:
       - NAMESPACE=synfhir-store
       - METRICSENABLE=false
       - PORT=3000
       - SERVICEDIR=services
     env_file:
-       - ../../proxy.env
+      - ../../proxy.env
     labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
-    - "traefik.http.services.proxy.loadbalancer.server.port=3000"
-    - "traefik.http.routers.proxy.entrypoints=secure"
-    - "traefik.http.routers.proxy.tls=true"
-    - "traefik.http.routers.proxy.tls.domains[0].main=${SSL_CERTIFICATE_CN}"
+      - "traefik.enable=true"
+      - "traefik.http.routers.proxy.rule=PathPrefix(`/fhir`)"
+      - "traefik.http.services.proxy.loadbalancer.server.port=3000"
+      - "traefik.http.routers.proxy.entrypoints=secure"
+      - "traefik.http.routers.proxy.tls=true"
+      - "traefik.http.routers.proxy.tls.domains[0].main=${SSL_CERTIFICATE_CN}"
     networks:
       - internal
-      
+
   proxy-ssl:
     image: synaneticsltd/synfhir-windows-traefik:ltsc2019
     command: "--configFile=C:/etc/traefik/windows/2019/traefik.toml"
@@ -42,7 +41,7 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
-    depends_on: 
+    depends_on:
       - proxy
     volumes:
       - ../../../ssl/certs:C:\etc\traefik\certs
@@ -53,7 +52,7 @@ services:
     networks:
       - internal
       - default
-    
+
 networks:
   internal:
   default:

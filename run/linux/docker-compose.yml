@@ -1,6 +1,6 @@
 version: "3.2"
 #
-# Spin up an instance of the Model FHIR Proxy
+# Spin up an instance of the FHIR Appliance
 #
 # cd run
 # docker-compose up
@@ -13,12 +13,11 @@ version: "3.2"
 # (npm run proxy:up:detached)
 #
 services:
-
   localdb:
     image: postgres
     container_name: localdb
     restart: always
-    environment: 
+    environment:
       - POSTGRES_DB=fhirstore
       - POSTGRES_USER=iamonfhir
     env_file:
@@ -34,7 +33,7 @@ services:
     image: dpage/pgadmin4
     container_name: localdb-client
     env_file:
-        - dbclient.env
+      - dbclient.env
     ports:
       - 54321:80
     depends_on:
@@ -45,14 +44,14 @@ services:
   proxy:
     image: synaneticsltd/synfhir-store:linux-latest
     restart: always
-    environment: 
+    environment:
       - NAMESPACE=synfhir-store
       - METRICSENABLE=false
       - PORT=3000
       - SERVICEDIR=services
     env_file:
-       - ../proxy.env
-    depends_on: 
+      - ../proxy.env
+    depends_on:
       - localdb
     labels:
       - "traefik.enable=true"
@@ -70,7 +69,7 @@ services:
       - 443:443
       - 80:80
       - 8080:8080
-    depends_on: 
+    depends_on:
       - proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -83,5 +82,3 @@ services:
 
 networks:
   internal:
-  
-    
