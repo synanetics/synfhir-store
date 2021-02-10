@@ -1,6 +1,6 @@
--- Database: fhirstore
-	
-CREATE TABLE public."ResourceData"
+CREATE SCHEMA IF NOT EXISTS audit;
+        
+CREATE TABLE IF NOT EXISTS public."ResourceData"
 (
     "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
     "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
@@ -9,19 +9,48 @@ CREATE TABLE public."ResourceData"
     "LastUpdated" timestamp with time zone,
     CONSTRAINT "ResourceData_pkey" PRIMARY KEY ("ResourceType", "ResourceID")
 )
-
+WITH (OIDS = FALSE)
+TABLESPACE pg_default;
+        
+CREATE TABLE IF NOT EXISTS audit."ResourceData"
+(
+    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "Resource" json,
+    "VersionID" integer,
+    "LastUpdated" timestamp with time zone,
+    CONSTRAINT "ResourceData_pkey" PRIMARY KEY ("ResourceType", "ResourceID")
+)
+WITH (OIDS = FALSE)
+TABLESPACE pg_default;
+        
+CREATE TABLE IF NOT EXISTS public."ResourceVersion"
+(
+    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "VersionID" integer NOT NULL,
+    "Resource" json,
+    "LastUpdated" timestamp with time zone,
+    "IsDeleted" boolean DEFAULT false,
+    CONSTRAINT "ResourceVersion_pkey" PRIMARY KEY ("ResourceType", "ResourceID", "VersionID")
+)
+WITH (OIDS = FALSE)
+TABLESPACE pg_default;
+        
+CREATE TABLE IF NOT EXISTS audit."ResourceVersion"
+(
+    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "VersionID" integer NOT NULL,
+    "Resource" json,
+    "LastUpdated" timestamp with time zone,
+    "IsDeleted" boolean DEFAULT false,
+    CONSTRAINT "ResourceVersion_pkey" PRIMARY KEY ("ResourceType", "ResourceID", "VersionID")
+)
+WITH (OIDS = FALSE)
 TABLESPACE pg_default;
 
-ALTER TABLE public."ResourceData"
-    OWNER to iamonfhir;
-
-GRANT ALL ON TABLE public."ResourceData" TO iamonfhir;
-
--- Table: public."ResourceIndex"
-
--- DROP TABLE public."ResourceIndex";
-
-CREATE TABLE public."ResourceIndex"
+CREATE TABLE IF NOT EXISTS public."ResourceIndex"
 (
     "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
     "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
@@ -29,6 +58,7 @@ CREATE TABLE public."ResourceIndex"
     "SearchType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
     "ValueType" character varying COLLATE pg_catalog."default",
     "ValueId" character varying COLLATE pg_catalog."default",
+
     "ValueUrl" character varying COLLATE pg_catalog."default",
     "ValueDisplay" character varying COLLATE pg_catalog."default",
     "ValueNumber" numeric,
@@ -40,89 +70,118 @@ CREATE TABLE public."ResourceIndex"
     "ValueText" character varying COLLATE pg_catalog."default",
     "ValueString" character varying COLLATE pg_catalog."default"
 )
-
+WITH (OIDS = FALSE)
 TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ResourceID"
+    ON public."ResourceIndex" USING btree
+    ("ResourceID" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ResourceType"
+    ON public."ResourceIndex" USING btree
+    ("ResourceType" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_SearchTerm"
+    ON public."ResourceIndex" USING btree
+    ("SearchTerm" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueCode"
+    ON public."ResourceIndex" USING btree
+    ("ValueCode" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueDisplay"
+    ON public."ResourceIndex" USING btree
+    ("ValueDisplay" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueEndDate"
+    ON public."ResourceIndex" USING btree
+    ("ValueEndDate")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueId"
+    ON public."ResourceIndex" USING btree
+    ("ValueId" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueNumber"
+    ON public."ResourceIndex" USING btree
+    ("ValueNumber")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueStartDate"
+    ON public."ResourceIndex" USING btree
+    ("ValueStartDate")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueString"
+    ON public."ResourceIndex" USING btree
+    ("ValueString" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueSystem"
+    ON public."ResourceIndex" USING btree
+    ("ValueSystem" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueText"
+    ON public."ResourceIndex" USING btree
+    ("ValueText" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueType"
+    ON public."ResourceIndex" USING btree
+    ("ValueType" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueUri"
+    ON public."ResourceIndex" USING btree
+    ("ValueUri" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+    
+CREATE INDEX IF NOT EXISTS "idxResourceIndex_ValueUrl"
+    ON public."ResourceIndex" USING btree
+    ("ValueUrl" COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
 
-ALTER TABLE public."ResourceIndex"
-    OWNER to iamonfhir;
+CREATE TABLE IF NOT EXISTS audit."ResourceIndex"
+    (
+        "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "SearchTerm" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "SearchType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "ValueType" character varying COLLATE pg_catalog."default",
+        "ValueId" character varying COLLATE pg_catalog."default",
+        "ValueUrl" character varying COLLATE pg_catalog."default",
+        "ValueDisplay" character varying COLLATE pg_catalog."default",
+        "ValueNumber" numeric,
+        "ValueSystem" character varying COLLATE pg_catalog."default",
+        "ValueCode" character varying COLLATE pg_catalog."default",
+        "ValueUri" character varying COLLATE pg_catalog."default",
+        "ValueStartDate" timestamp with time zone,
+        "ValueEndDate" timestamp with time zone,
+        "ValueText" character varying COLLATE pg_catalog."default",
+        "ValueString" character varying COLLATE pg_catalog."default"
+    )
+    WITH (
+    OIDS = FALSE
+    )
+    TABLESPACE pg_default;
 
-GRANT ALL ON TABLE public."ResourceIndex" TO iamonfhir;
-
-CREATE TABLE public."ResourceVersion"
-(
-    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "VersionID" integer NOT NULL,
-    "Resource" json,
-    "LastUpdated" timestamp with time zone,
-    "IsDeleted" boolean DEFAULT false,
-    CONSTRAINT "ResourceVersion_pkey" PRIMARY KEY ("ResourceType", "ResourceID", "VersionID")
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE public."ResourceVersion"
-    OWNER to iamonfhir;
-
-GRANT ALL ON TABLE public."ResourceVersion" TO iamonfhir;
-
-CREATE TABLE public."QueryCache"
+CREATE TABLE IF NOT EXISTS audit."Queue"
 (
     id character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "RowNumber" integer NOT NULL,
-    "Resource" json,
-    "Expires" timestamp with time zone,
-    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "ResourceID" character varying(64) COLLATE pg_catalog."default",
-    CONSTRAINT "QueryCache_pkey" PRIMARY KEY (id, "ResourceType", "RowNumber")
+    "AuditEvent" json,
+    CONSTRAINT "Queue_pkey" PRIMARY KEY (id)
 )
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
- 
-ALTER TABLE public."QueryCache"
-    OWNER to iamonfhir;
- 
-GRANT ALL ON TABLE public."QueryCache" TO iamonfhir;
-
-CREATE TABLE public."AsyncIncludes"
-(
-    id character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    "Resource" json,
-    "Expires" timestamp with time zone,
-    CONSTRAINT "AsyncIncludes_pkey" PRIMARY KEY (id, "ResourceType", "ResourceID")
-)
-WITH (
-    OIDS = FALSE
-)
+WITH (OIDS = FALSE)
 TABLESPACE pg_default;
 
- 
-ALTER TABLE public."AsyncIncludes"
-    OWNER to iamonfhir;
-
-GRANT ALL ON TABLE public."AsyncIncludes" TO iamonfhir;
-
-CREATE TABLE public."AsyncRequest"
-(
-    id character varying(64) COLLATE pg_catalog."default" NOT NULL,
-    data json,
-    CONSTRAINT "AsyncRequest_pkey" PRIMARY KEY (id)
-)
-WITH (
-    OIDS = FALSE
-)
-TABLESPACE pg_default;
-
-ALTER TABLE public."AsyncRequest"
-    OWNER to iamonfhir;
-
-GRANT ALL ON TABLE public."AsyncRequest" TO iamonfhir;
-
-CREATE TABLE public."QueryDetails"
+CREATE TABLE IF NOT EXISTS public."QueryDetails"
 (
     id character varying(64) COLLATE pg_catalog."default" NOT NULL,
     "ResourceType" character varying(64) COLLATE pg_catalog."default",
@@ -136,10 +195,43 @@ WITH (
     OIDS = FALSE
 )
 TABLESPACE pg_default;
+    
+CREATE TABLE IF NOT EXISTS public."QueryCache"
+(
+    id character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "RowNumber" integer NOT NULL,
+    "Resource" json,
+    "Expires" timestamp with time zone,
+    "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+    "ResourceID" character varying(64) COLLATE pg_catalog."default",
+    CONSTRAINT "QueryCache_pkey" PRIMARY KEY (id, "ResourceType", "RowNumber")
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
 
- 
-ALTER TABLE public."QueryDetails"
-    OWNER to iamonfhir;
+CREATE TABLE IF NOT EXISTS public."AsyncIncludes"
+    (
+        id character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "ResourceType" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "ResourceID" character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        "Resource" json,
+        "Expires" timestamp with time zone,
+        CONSTRAINT "AsyncIncludes_pkey" PRIMARY KEY (id, "ResourceType", "ResourceID")
+    )
+    WITH (
+        OIDS = FALSE
+    )
+    TABLESPACE pg_default;
 
- 
-GRANT ALL ON TABLE public."QueryDetails" TO iamonfhir;
+CREATE TABLE IF NOT EXISTS public."AsyncRequest"
+    (
+        id character varying(64) COLLATE pg_catalog."default" NOT NULL,
+        data json,
+        CONSTRAINT "AsyncRequest_pkey" PRIMARY KEY (id)
+    )
+    WITH (
+        OIDS = FALSE
+    )
+    TABLESPACE pg_default;
