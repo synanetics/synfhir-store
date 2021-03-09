@@ -89,6 +89,7 @@ The flavour of dev environment is of course entirely up to you... the FHIR Appli
 ### Updating the FHIR Appliance container
 
 [How to update a FHIR Appliance container - Linux](docs/updating-model-fhir-store.md)
+
 [How to update a FHIR Appliance container - Windows Server](docs/updating-model-fhir-store-windows.md)
 
 ---
